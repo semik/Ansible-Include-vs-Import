@@ -1,0 +1,26 @@
+- name: "Ansible Import / Include demo"
+  hosts: all
+  connection: local
+
+  tasks:
+    - name: Include
+      ansible.builtin.include:
+        file: include-import-demo-snippet.yml
+      tags: [test_tag]
+
+    - name: Import tasks
+      ansible.builtin.import_tasks:
+        file: include-import-demo-snippet.yml
+      tags: [test_tag]
+
+    - name: Include tasks without apply
+      ansible.builtin.include_tasks:
+        file: include-import-demo-snippet.yml
+      tags: [test_tag]
+
+    - name: Include tasks with apply
+      ansible.builtin.include_tasks:
+        file: include-import-demo-snippet.yml
+        apply:
+          tags: [test_tag]
+      tags: [test_tag]
